@@ -62,6 +62,7 @@ jobs:
             gettext-runtime \
             gnutls-devel \
             libinotify \
+            mesa \
             moltenvk \
             libsdl2
 

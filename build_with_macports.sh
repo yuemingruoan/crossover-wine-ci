@@ -58,7 +58,7 @@ endgroup
 
 
 begingroup "Installing dependencies libraries"
-sudo port install freetype gnutls-devel gettext-runtime libpcap libsdl2 moltenvk-latest
+sudo port install freetype gnutls-devel gettext-runtime libpcap libsdl2 mesa moltenvk-latest
 endgroup
 
 
