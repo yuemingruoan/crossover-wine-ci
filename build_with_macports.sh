@@ -58,7 +58,7 @@ endgroup
 
 
 begingroup "Installing dependencies libraries"
-sudo port install ffmpeg freetype gnutls-devel gettext-runtime libpcap libsdl2 mesa moltenvk-latest
+sudo port install ffmpeg freetype gnutls gettext-runtime libpcap libsdl2 mesa moltenvk-latest
 endgroup
 
 

@@ -61,7 +61,7 @@ jobs:
             ffmpeg \
             freetype \
             gettext-runtime \
-            gnutls-devel \
+            gnutls \
             libinotify \
             mesa \
             moltenvk \
