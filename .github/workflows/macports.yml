@@ -52,6 +52,7 @@ jobs:
             bison \
             ccache \
             gettext \
+            gettext-dev \
             mingw-w64 \
             pkgconfig
 

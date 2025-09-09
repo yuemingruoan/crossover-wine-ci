@@ -53,7 +53,7 @@ export PATH="/opt/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin
 
 
 begingroup "Installing dependencies build"
-sudo port install bison ccache gettext mingw-w64 pkgconfig
+sudo port install bison ccache gettext gettext-dev mingw-w64 pkgconfig
 endgroup
 
 
