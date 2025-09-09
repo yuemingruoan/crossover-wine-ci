@@ -107,8 +107,7 @@ endgroup
 
 
 begingroup "Configure wine64-${CROSS_OVER_VERSION}"
-mkdir -p ${BUILDROOT}/wine64-${CROSS_OVER_VERSION}
-pushd ${BUILDROOT}/wine64-${CROSS_OVER_VERSION}
+pushd ${GITHUB_WORKSPACE}/sources/wine
 ${WINE_CONFIGURE} \
     --prefix= \
     --disable-tests \
@@ -150,14 +149,14 @@ endgroup
 
 
 begingroup "Build wine64-${CROSS_OVER_VERSION}"
-pushd ${BUILDROOT}/wine64-${CROSS_OVER_VERSION}
+pushd ${GITHUB_WORKSPACE}/sources/wine
 make -j$(sysctl -n hw.ncpu 2>/dev/null)
 popd
 endgroup
 
 
 begingroup "Install wine64-${CROSS_OVER_VERSION}"
-pushd ${BUILDROOT}/wine64-${CROSS_OVER_VERSION}
+pushd ${GITHUB_WORKSPACE}/sources/wine
 make install-lib DESTDIR="${INSTALLROOT}/${WINE_INSTALLATION}"
 popd
 endgroup

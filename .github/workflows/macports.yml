@@ -95,8 +95,7 @@ jobs:
 
       - name: Configure wine
         run: |
-          mkdir -p ${{ env.BUILDROOT }}/wine64
-          pushd ${{ env.BUILDROOT }}/wine64
+          pushd sources/wine
           ${{ env.WINE_CONFIGURE }} \
             --build=x86_64-apple-darwin \
             --prefix= \
@@ -137,13 +136,13 @@ jobs:
 
       - name: Build wine
         run: |
-          pushd ${{ env.BUILDROOT }}/wine64
+          pushd sources/wine
           make -j$(sysctl -n hw.ncpu 2>/dev/null)
           popd
 
       - name: Install wine
         run: |
-          pushd ${{ env.BUILDROOT }}/wine64
+          pushd sources/wine
           make install-lib DESTDIR="$GITHUB_WORKSPACE/${{ env.WINE_INSTALLROOT }}"
           popd
 
