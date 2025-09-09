@@ -1,5 +1,4 @@
 SOURCES = \
-	ar.po \
 	ast.po \
 	bg.po \
 	ca.po \
