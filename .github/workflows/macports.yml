@@ -137,6 +137,7 @@ jobs:
       - name: Build wine
         run: |
           pushd sources/wine
+          make -j$(sysctl -n hw.ncpu 2>/dev/null) po
           make -j$(sysctl -n hw.ncpu 2>/dev/null)
           popd
 

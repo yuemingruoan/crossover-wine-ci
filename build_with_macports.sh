@@ -150,6 +150,7 @@ endgroup
 
 begingroup "Build wine64-${CROSS_OVER_VERSION}"
 pushd ${GITHUB_WORKSPACE}/sources/wine
+make -j$(sysctl -n hw.ncpu 2>/dev/null) po
 make -j$(sysctl -n hw.ncpu 2>/dev/null)
 popd
 endgroup
