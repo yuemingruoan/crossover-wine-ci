@@ -58,6 +58,7 @@ jobs:
       - name: Install runtime dependencies
         run: |
           sudo port install \
+            ffmpeg \
             freetype \
             gettext-runtime \
             gnutls-devel \
@@ -109,7 +110,7 @@ jobs:
             --without-fontconfig \
             --with-freetype \
             --with-gettext \
-            --without-gettextpo \
+            --with-gettextpo \
             --without-gphoto \
             --with-gnutls \
             --without-gssapi \

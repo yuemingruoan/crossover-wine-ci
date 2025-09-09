@@ -58,7 +58,7 @@ endgroup
 
 
 begingroup "Installing dependencies libraries"
-sudo port install freetype gnutls-devel gettext-runtime libpcap libsdl2 mesa moltenvk-latest
+sudo port install ffmpeg freetype gnutls-devel gettext-runtime libpcap libsdl2 mesa moltenvk-latest
 endgroup
 
 
@@ -122,7 +122,7 @@ ${WINE_CONFIGURE} \
     --without-fontconfig \
     --with-freetype \
     --with-gettext \
-    --without-gettextpo \
+    --with-gettextpo \
     --without-gphoto \
     --with-gnutls \
     --without-gssapi \
