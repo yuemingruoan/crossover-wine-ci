@@ -32,7 +32,6 @@ jobs:
     env:
       CROSS_OVER_SOURCE_URL: https://media.codeweavers.com/pub/crossover/source/crossover-sources-${{ matrix.CROSS_OVER_VERSION }}.tar.gz
       CROSS_OVER_LOCAL_FILE: crossover-sources-${{ matrix.CROSS_OVER_VERSION }}
-      WINE_INSTALLATION: wine-cx-${{ matrix.CROSS_OVER_VERSION }}
 
     steps:
       - name: Checkout
@@ -66,11 +65,25 @@ jobs:
             moltenvk \
             libsdl2
 
+      - name: Check if sources exist
+        id: check_sources
+        run: |
+          if [[ -d "sources" ]]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+            echo "WINE_INSTALLATION=wine-cx-local" >> $GITHUB_ENV
+            echo "Using existing sources directory"
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+            echo "WINE_INSTALLATION=wine-cx-${{ matrix.CROSS_OVER_VERSION }}" >> $GITHUB_ENV
+          fi
+
       - name: Download Crossover Sources
+        if: steps.check_sources.outputs.exists == 'false'
         run: |
           curl -o ${{ env.CROSS_OVER_LOCAL_FILE }}.tar.gz ${{ env.CROSS_OVER_SOURCE_URL }}
 
       - name: Extract Crossover Sources
+        if: steps.check_sources.outputs.exists == 'false'
         run: |
           tar xf ${{ env.CROSS_OVER_LOCAL_FILE }}.tar.gz
 
