@@ -28,7 +28,7 @@ export CROSS_OVER_SOURCE_URL=https://media.codeweavers.com/pub/crossover/source/
 export CROSS_OVER_LOCAL_FILE=crossover-${CROSS_OVER_VERSION}
 
 # directories / files inside the downloaded tar file directory structure
-export WINE_CONFIGURE=$GITHUB_WORKSPACE/sources/wine/configure
+export WINE_CONFIGURE=${GITHUB_WORKSPACE}/sources/wine/configure
 
 # build directories
 export BUILDROOT=$GITHUB_WORKSPACE/build
@@ -80,19 +80,25 @@ export LDFLAGS="-Wl,-headerpad_max_install_names -Wl,-rpath,@loader_path/../../ 
 export ac_cv_lib_soname_vulkan=""
 
 
-if [[ ! -f ${CROSS_OVER_LOCAL_FILE}.tar.gz ]]; then
-    begingroup "Downloading $CROSS_OVER_LOCAL_FILE"
-    curl -o ${CROSS_OVER_LOCAL_FILE}.tar.gz ${CROSS_OVER_SOURCE_URL}
-    endgroup
-fi
-
-
-begingroup "Extracting $CROSS_OVER_LOCAL_FILE"
+# Check if sources directory exists
 if [[ -d "${GITHUB_WORKSPACE}/sources" ]]; then
-    rm -rf ${GITHUB_WORKSPACE}/sources
+    CROSS_OVER_DIR=${GITHUB_WORKSPACE}
+    VERSION="local"
+    echo "Using existing sources directory"
+else
+    # Search for crossover sources tar.gz file
+    CROSS_OVER_TAR_FILE=$(ls -t ${GITHUB_WORKSPACE}/crossover-sources-*.tar.gz 2>/dev/null | head -1)
+    if [[ -z "$CROSS_OVER_TAR_FILE" ]]; then
+        echo "No sources directory or crossover-sources-*.tar.gz found in ${GITHUB_WORKSPACE}"
+        exit 1
+    fi
+    VERSION=$(basename "$CROSS_OVER_TAR_FILE" .tar.gz | sed 's/crossover-sources-//')
+    CROSS_OVER_DIR=${GITHUB_WORKSPACE}
+    echo "Extracting $CROSS_OVER_TAR_FILE"
+    tar xf "$CROSS_OVER_TAR_FILE"
 fi
-tar xf ${CROSS_OVER_LOCAL_FILE}.tar.gz
-endgroup
+export CROSS_OVER_VERSION=$VERSION
+export CROSS_OVER_LOCAL_FILE=crossover-sources-${VERSION}
 
 
 begingroup "Add distversion.h"
