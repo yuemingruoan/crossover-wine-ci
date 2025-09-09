@@ -109,7 +109,6 @@ jobs:
             --without-fontconfig \
             --with-freetype \
             --with-gettext \
-            --with-gettextpo \
             --without-gphoto \
             --with-gnutls \
             --without-gssapi \
